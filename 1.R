@@ -1,7 +1,6 @@
 setwd("~/GitHub/R-programming-assignment-3")
-hist(outcome[, 11])
 best <- function(state, outcome){
-  #options(warn=-1)
+  options(warn=-1)
   df <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
   df[, 11] <- as.numeric(df[, 11])
   df[, 17] <- as.numeric(df[, 17])
@@ -14,14 +13,14 @@ best <- function(state, outcome){
     here <- statedat[statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack==min(statedat[,11], na.rm = TRUE),2]
     here <- here[!is.na(here)]
   }
-  if(outcome == "heart failure"){
+  else{  if(outcome == "heart failure"){
     here <- statedat[statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure==min(statedat[,17], na.rm = TRUE),2]
     here <- here[!is.na(here)]
-  }
+  }   else {
   if(outcome == "pneumonia"){
     here <- statedat[statedat$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia==min(statedat[,23], na.rm = TRUE),2]
     here <- here[!is.na(here)]
-  }
-  else {stop("invalid outcome")}
-  here
+  } 
+  else {stop("invalid outcome")} }}
+  sort(here)[1]
 }
