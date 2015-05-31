@@ -10,27 +10,27 @@ rankhospital <- function(state, outcome, num = "best"){
     stop("invalid state")
   }
   if(outcome == "heart attack"){
-    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack)
+    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack, stringsAsFactors = FALSE)
     here <- here[order(here[,2], na.last= NA),]
     here <- data.frame(here, rank = 1:length(here[,2]))
   }
   else{  if(outcome == "heart failure"){
-    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure)
+    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure, stringsAsFactors = FALSE)
     here <- here[order(here[,2], na.last= NA),]
     here <- data.frame(here, rank = 1:length(here[,2]))
   }   else {
   if(outcome == "pneumonia"){
-    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia)
+    here <- data.frame(Hospital.Name = statedat$Hospital.Name, Rate = statedat$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, stringsAsFactors = FALSE)
     here <- here[order(here[,2], na.last= NA),]
     here <- data.frame(here, rank = 1:length(here[,2]))
   } 
   else {stop("invalid outcome")} }}
   
   if(num == "best"){
-    here <- here[1,]
+    here <- here[1,1]
   }
   else {  if(num == "worst"){
-    here <- here[length(here[,1]),]
+    here <- here[length(here[,1]),1]
   } 
   else {  if(num > length(here[,1])){return(NA)}
   else {          
